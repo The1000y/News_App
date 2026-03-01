@@ -13,6 +13,7 @@ class CustomCardWidget extends StatelessWidget {
   final CategoryDataModel categoryModel;
   final bool isLeft;
   final void Function() onTap;
+
   @override
   Widget build(BuildContext context) {
     return Container(

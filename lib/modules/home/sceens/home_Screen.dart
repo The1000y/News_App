@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/core/gen/assets.gen.dart';
 import 'package:news_app/models/gategry_data_model.dart';
+import 'package:news_app/modules/home/sceens/widgets/category_news_data_view.dart';
 import 'package:news_app/modules/home/sceens/widgets/custom_card_widget.dart';
 import 'package:news_app/modules/home/sceens/widgets/custom_drawer_widget.dart';
 
@@ -99,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             )
-          : SizedBox(),
+          : CategoryNewsDataView(),
     );
   }
 
