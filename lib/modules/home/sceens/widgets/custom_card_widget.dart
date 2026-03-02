@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/core/themes/color_pallete.dart';
-import 'package:news_app/models/gategry_data_model.dart';
+import 'package:news_app/models/categry_data_model.dart';
 
 class CustomCardWidget extends StatelessWidget {
   const CustomCardWidget({
