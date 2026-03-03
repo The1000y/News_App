@@ -43,12 +43,6 @@ class NetworkHandler {
         var data = jsonDecode(resposce.body);
         var myData = Data.fromJson(data);
         return myData.articles;
-
-        // for (var element in data["articles"]) {
-        //   var myData = Data.fromJson(element);
-        //   articalDataList.add(myData);
-        // }
-        // return articalDataList;
       } else {
         throw Exception("something went wrong");
       }
