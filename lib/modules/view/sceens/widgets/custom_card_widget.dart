@@ -25,12 +25,14 @@ class CustomCardWidget extends StatefulWidget {
 class _CustomCardWidgetState extends State<CustomCardWidget> {
   @override
   Widget build(BuildContext context) {
+    var myTheme = Theme.of(context);
+
     return Container(
       margin: EdgeInsets.only(bottom: 16),
       width: double.infinity,
       height: 195,
       decoration: BoxDecoration(
-        color: ColorPallete.primaryDarkcolor,
+        color: myTheme.primaryColorDark,
         borderRadius: BorderRadius.circular(24),
         image: DecorationImage(
           image: AssetImage(widget.categoryModel.image),
@@ -54,11 +56,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                     : Alignment.topLeft,
                 child: Text(
                   widget.categoryModel.name,
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w500,
-                    color: ColorPallete.scafoldBackgroundColor,
-                  ),
+                  style: myTheme.textTheme.titleLarge,
                 ),
               ),
             ),
@@ -72,9 +70,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                 ),
                 // margin: EdgeInsets.only(bottom: 40, left: 130),
                 decoration: BoxDecoration(
-                  color: ColorPallete.scafoldBackgroundColor.withValues(
-                    alpha: 0.5,
-                  ),
+                  color: AppColors.grayColor.withValues(alpha: 0.8),
                   borderRadius: BorderRadius.all(Radius.circular(360)),
                 ),
                 child: Row(
@@ -82,12 +78,11 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(12.0),
+                      padding: const EdgeInsets.all(16.0),
                       child: Text(
                         'View All',
-                        style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.w500,
+                        style: myTheme.textTheme.titleSmall!.copyWith(
+                          color: AppColors.darkColor,
                         ),
                       ),
                     ),
@@ -117,14 +112,13 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                               widget.offset = Offset(0, 0);
                             }
                           });
-                          ;
                         },
                         child: CircleAvatar(
-                          backgroundColor: ColorPallete.scafoldBackgroundColor,
+                          backgroundColor: myTheme.primaryColorLight,
                           radius: 30,
                           child: Icon(
                             Icons.arrow_back_ios_rounded,
-                            color: ColorPallete.primaryDarkcolor,
+                            color: myTheme.primaryColorDark,
                           ),
                         ),
                       ),

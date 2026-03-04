@@ -1,106 +1,121 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/core/gen/assets.gen.dart';
+import 'package:news_app/core/provider/app_provider.dart';
 import 'package:news_app/core/themes/color_pallete.dart';
+import 'package:provider/provider.dart';
+
+enum SelectedTheme { dark, ligth }
 
 // ignore: must_be_immutable
-class CustomDrawerWidget extends StatefulWidget {
-  CustomDrawerWidget({super.key, required this.onTap});
+class CustomDrawerWidget extends StatelessWidget {
+  CustomDrawerWidget({
+    super.key,
+    required this.onTap,
+    required this.theme,
+    required this.onThemeChange,
+  });
 
   final VoidCallback onTap;
+  final SelectedTheme theme;
+  Function(SelectedTheme theme) onThemeChange;
 
-  @override
-  State<CustomDrawerWidget> createState() => _CustomDrawerWidgetState();
-  String selectedTheme = 'Dark';
-  String selectedLanguage = 'English';
-}
-
-class _CustomDrawerWidgetState extends State<CustomDrawerWidget> {
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      width: MediaQuery.of(context).size.width * 0.70,
-      child: Container(
-        decoration: const BoxDecoration(color: ColorPallete.primaryDarkcolor),
-        child: Column(
-          children: [
-            Container(
-              height: 166,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: ColorPallete.scafoldBackgroundColor,
-              ),
-              child: Center(
-                child: Text(
-                  'News App',
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            GestureDetector(
-              onTap: widget.onTap,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  spacing: 10,
-                  children: [
-                    Assets.icons.home.svg(
-                      color: ColorPallete.scafoldBackgroundColor,
-                    ),
-                    Text(
-                      'Go to Home',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: ColorPallete.scafoldBackgroundColor,
+    return Consumer<AppProvider>(
+      builder: (context, provider, child) {
+        var myTheme = Theme.of(context);
+
+        return Drawer(
+          width: MediaQuery.of(context).size.width * 0.70,
+          child: Container(
+            decoration: const BoxDecoration(color: AppColors.darkColor),
+            child: Column(
+              children: [
+                Container(
+                  height: 166,
+                  width: double.infinity,
+                  decoration: BoxDecoration(color: AppColors.whiteColor),
+                  child: Center(
+                    child: Text(
+                      'News App',
+                      style: myTheme.textTheme.titleLarge!.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.darkColor,
                       ),
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-            Divider(thickness: 2, endIndent: 20, indent: 20),
-            headerTitle(icon: Assets.icons.theme, title: 'Theme'),
+                GestureDetector(
+                  onTap: onTap,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      spacing: 10,
+                      children: [
+                        Assets.icons.home.svg(color: AppColors.whiteColor),
+                        Text(
+                          'Go to Home',
+                          style: myTheme.textTheme.titleLarge!.copyWith(
+                            color: AppColors.whiteColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Divider(thickness: 2, endIndent: 20, indent: 20),
+                headerTitle(icon: Assets.icons.theme, title: 'Theme'),
 
-            //menu of theme
-            PopupMenuButton<String>(
-              onSelected: (value) {
-                print(value);
-                widget.selectedTheme = value;
-                setState(() {});
-              },
-              offset: Offset(60, 50),
-              itemBuilder: (context) {
-                return [
-                  PopupMenuItem<String>(value: 'Dark', child: Text('Dark')),
-                  PopupMenuItem<String>(value: 'Light', child: Text('Light')),
-                ];
-              },
-              child: CustomContainer(title: widget.selectedTheme),
-            ),
-            SizedBox(height: 25),
-            Divider(thickness: 2, endIndent: 20, indent: 20),
-            headerTitle(icon: Assets.icons.earth, title: 'Language'),
+                //menu of theme
+                PopupMenuButton<SelectedTheme>(
+                  onSelected: (value) {
+                    onThemeChange(value);
+                  },
+                  offset: Offset(60, 50),
+                  itemBuilder: (context) {
+                    return [
+                      PopupMenuItem(
+                        value: SelectedTheme.dark,
+                        child: Text('Dark'),
+                      ),
+                      PopupMenuItem(
+                        value: SelectedTheme.ligth,
+                        child: Text('Light'),
+                      ),
+                    ];
+                  },
+                  child: CustomContainer(
+                    title: theme == SelectedTheme.dark ? 'Dark' : 'Light',
+                  ),
+                ),
+                SizedBox(height: 25),
+                Divider(thickness: 2, endIndent: 20, indent: 20),
+                headerTitle(icon: Assets.icons.earth, title: 'Language'),
 
-            //menu of language
-            PopupMenuButton(
-              offset: Offset(60, 50),
-              onSelected: (value) {
-                widget.selectedLanguage = value;
-                setState(() {});
-              },
-              itemBuilder: (context) {
-                return [
-                  PopupMenuItem(value: 'English', child: Text('English')),
-                  PopupMenuItem(value: 'Arabic', child: Text('Arabic')),
-                ];
-              },
-              child: CustomContainer(title: widget.selectedLanguage),
+                //menu of language
+                PopupMenuButton(
+                  offset: Offset(60, 50),
+                  onSelected: (value) {
+                    selectedLanguage = value;
+                  },
+                  itemBuilder: (context) {
+                    return [
+                      PopupMenuItem(value: 'English', child: Text('English')),
+                      PopupMenuItem(value: 'Arabic', child: Text('Arabic')),
+                    ];
+                  },
+                  child: CustomContainer(title: selectedLanguage),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
+
+  // String selectedTheme = 'Dark';
+  String selectedLanguage = 'English';
 }
 
 class CustomContainer extends StatelessWidget {
@@ -109,14 +124,12 @@ class CustomContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var myTheme = Theme.of(context);
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(10)),
-        border: Border.all(
-          color: ColorPallete.scafoldBackgroundColor,
-          width: 1,
-        ),
+        border: Border.all(color: AppColors.whiteColor, width: 1),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -125,16 +138,15 @@ class CustomContainer extends StatelessWidget {
             padding: const EdgeInsets.all(10.0),
             child: Text(
               title,
-              style: TextStyle(
-                fontSize: 18,
-                color: ColorPallete.scafoldBackgroundColor,
+              style: myTheme.textTheme.titleMedium!.copyWith(
+                color: AppColors.whiteColor,
               ),
             ),
           ),
           Icon(
             Icons.arrow_drop_down_rounded,
             size: 40,
-            color: ColorPallete.scafoldBackgroundColor,
+            color: AppColors.whiteColor,
           ),
         ],
       ),
@@ -154,13 +166,13 @@ class headerTitle extends StatelessWidget {
       child: Row(
         spacing: 10,
         children: [
-          icon.svg(color: ColorPallete.scafoldBackgroundColor),
+          icon.svg(color: AppColors.whiteColor),
           Text(
             title,
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: ColorPallete.scafoldBackgroundColor,
+              color: AppColors.whiteColor,
             ),
           ),
         ],

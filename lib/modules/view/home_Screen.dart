@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/core/gen/assets.gen.dart';
+import 'package:news_app/core/provider/app_provider.dart';
 import 'package:news_app/models/categry_data_model.dart';
 import 'package:news_app/modules/view/sceens/widgets/category_news_data_view.dart';
 import 'package:news_app/modules/view/sceens/widgets/custom_card_widget.dart';
@@ -8,14 +9,11 @@ import 'package:news_app/modules/view_model/home_view_model.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
+  // SelectedTheme selectedTheme = SelectedTheme.dark;
 
-class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     List<CategoryDataModel> category = [
@@ -58,65 +56,73 @@ class _HomeScreenState extends State<HomeScreen> {
     ];
     return ChangeNotifierProvider(
       create: (context) => HomeViewModel(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: selectedCategory == null
-              ? Text('News', style: TextStyle(fontSize: 25))
-              : Text(selectedCategory!.name, style: TextStyle(fontSize: 25)),
-          actions: [
-            IconButton(onPressed: () {}, icon: Assets.icons.search.svg()),
-          ],
-        ),
-        drawer: CustomDrawerWidget(
-          onTap: () {
-            setState(() {
-              selectedCategory = null;
-              Navigator.pop(context);
-            });
-          },
-        ),
+      child: Consumer<AppProvider>(
+        builder: (context, provider, child) {
+          var myTheme = Theme.of(context);
 
-        body: selectedCategory == null
-            ? Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Good Morning ... \nHere is Some News For You",
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      SizedBox(height: 16),
-                      ...List.generate(category.length, (index) {
-                        return CustomCardWidget(
-                          onSwap: (categoryDataModel) {
-                            onSelectedCategory(category[index]);
-                          },
-                          onTap: () {
-                            onSelectedCategory(category[index]);
-                          },
-                          categoryModel: category[index],
-                          isLeft: index % 2 == 0,
-                        );
-                      }),
-                    ],
+          return Scaffold(
+            appBar: AppBar(
+              //////////////////////
+              iconTheme: IconThemeData(color: myTheme.primaryColorDark),
+              title: provider.selectedCategory == null
+                  ? Text('News', style: myTheme.textTheme.titleSmall)
+                  : Text(
+                      provider.selectedCategory!.name,
+                      style: myTheme.textTheme.titleSmall,
+                    ),
+              actions: [
+                IconButton(
+                  onPressed: () {},
+                  ///////////////////////////
+                  icon: Assets.icons.search.svg(
+                    color: myTheme.primaryColorDark,
                   ),
                 ),
-              )
-            : CategoryNewsDataView(categoryDataModel: selectedCategory!),
+              ],
+            ),
+            drawer: CustomDrawerWidget(
+              onThemeChange: provider.onChangeTheme,
+              theme: provider.selectedTheme,
+              onTap: () {
+                provider.selectedCategory = null;
+                Navigator.pop(context);
+              },
+            ),
+
+            body: provider.selectedCategory == null
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Good Morning ... \nHere is Some News For You",
+                            style: myTheme.textTheme.titleMedium,
+                          ),
+                          SizedBox(height: 16),
+                          ...List.generate(category.length, (index) {
+                            return CustomCardWidget(
+                              onSwap: (categoryDataModel) {
+                                provider.onSelectedCategory(category[index]);
+                              },
+                              onTap: () {
+                                provider.onSelectedCategory(category[index]);
+                              },
+                              categoryModel: category[index],
+                              isLeft: index % 2 == 0,
+                            );
+                          }),
+                        ],
+                      ),
+                    ),
+                  )
+                : CategoryNewsDataView(
+                    categoryDataModel: provider.selectedCategory!,
+                  ),
+          );
+        },
       ),
     );
-  }
-
-  CategoryDataModel? selectedCategory;
-
-  void onSelectedCategory(CategoryDataModel categoryDataModel) {
-    setState(() {
-      selectedCategory = categoryDataModel;
-    });
   }
 }

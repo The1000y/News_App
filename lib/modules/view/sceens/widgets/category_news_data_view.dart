@@ -37,6 +37,7 @@ class _CategoryNewsDataViewState extends State<CategoryNewsDataView> {
 
   @override
   Widget build(BuildContext context) {
+    var myTheme = Theme.of(context);
     return Column(
       children: [
         SizedBox(height: 8),
@@ -52,7 +53,7 @@ class _CategoryNewsDataViewState extends State<CategoryNewsDataView> {
                 tabAlignment: TabAlignment.start,
                 overlayColor: WidgetStatePropertyAll(Colors.transparent),
                 indicatorSize: TabBarIndicatorSize.tab,
-                indicatorColor: ColorPallete.primaryDarkcolor,
+                indicatorColor: AppColors.darkColor,
                 dividerColor: Colors.transparent,
                 physics: BouncingScrollPhysics(),
                 onTap: (index) {
@@ -70,7 +71,7 @@ class _CategoryNewsDataViewState extends State<CategoryNewsDataView> {
                       fontWeight: isSelected
                           ? FontWeight.w800
                           : FontWeight.w400,
-                      color: ColorPallete.primaryDarkcolor,
+                      color: myTheme.primaryColorDark,
                     ),
                   );
                 }),
@@ -95,7 +96,7 @@ class _CategoryNewsDataViewState extends State<CategoryNewsDataView> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(
-                          color: ColorPallete.primaryDarkcolor,
+                          color: AppColors.darkColor,
                           width: 1,
                         ),
                       ),
@@ -153,10 +154,7 @@ class _CategoryNewsDataViewState extends State<CategoryNewsDataView> {
                             child: Text(
                               nextProvider.listArtical![index].title ??
                                   "no title",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                              ),
+                              style: myTheme.textTheme.bodyLarge,
                             ),
                           ),
                           Padding(
@@ -170,10 +168,7 @@ class _CategoryNewsDataViewState extends State<CategoryNewsDataView> {
                                     overflow: TextOverflow.ellipsis,
                                     nextProvider.listArtical![index].author ??
                                         "",
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.grey.withValues(alpha: 0.8),
-                                    ),
+                                    style: myTheme.textTheme.bodySmall,
                                   ),
                                 ),
                                 Text(
@@ -181,10 +176,7 @@ class _CategoryNewsDataViewState extends State<CategoryNewsDataView> {
                                           .listArtical![index]
                                           .publishedAt ??
                                       "",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.grey.withValues(alpha: 0.8),
-                                  ),
+                                  style: myTheme.textTheme.bodySmall,
                                 ),
                               ],
                             ),
