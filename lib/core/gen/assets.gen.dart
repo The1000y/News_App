@@ -39,52 +39,66 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/business.png
-  AssetGenImage get business =>
-      const AssetGenImage('assets/images/business.png');
+  /// File path: assets/images/40-yers-old.png
+  AssetGenImage get a40YersOld =>
+      const AssetGenImage('assets/images/40-yers-old.png');
 
-  /// File path: assets/images/entertainment.png
-  AssetGenImage get entertainment =>
-      const AssetGenImage('assets/images/entertainment.png');
+  /// File path: assets/images/Rectangle 1 (1).png
+  AssetGenImage get rectangle11 =>
+      const AssetGenImage('assets/images/Rectangle 1 (1).png');
+
+  /// File path: assets/images/business_image.png
+  AssetGenImage get businessImage =>
+      const AssetGenImage('assets/images/business_image.png');
+
+  /// File path: assets/images/entertinment.png
+  AssetGenImage get entertinment =>
+      const AssetGenImage('assets/images/entertinment.png');
 
   /// File path: assets/images/footer.png
   AssetGenImage get footer => const AssetGenImage('assets/images/footer.png');
 
-  /// File path: assets/images/general.png
-  AssetGenImage get general => const AssetGenImage('assets/images/general.png');
+  /// File path: assets/images/general_image.png
+  AssetGenImage get generalImage =>
+      const AssetGenImage('assets/images/general_image.png');
 
-  /// File path: assets/images/health.png
-  AssetGenImage get health => const AssetGenImage('assets/images/health.png');
+  /// File path: assets/images/health_image.png
+  AssetGenImage get healthImage =>
+      const AssetGenImage('assets/images/health_image.png');
 
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
 
-  /// File path: assets/images/science.png
-  AssetGenImage get science => const AssetGenImage('assets/images/science.png');
+  /// File path: assets/images/science_image.png
+  AssetGenImage get scienceImage =>
+      const AssetGenImage('assets/images/science_image.png');
 
   /// File path: assets/images/splash_Screen.png
   AssetGenImage get splashScreen =>
       const AssetGenImage('assets/images/splash_Screen.png');
 
-  /// File path: assets/images/sports.png
-  AssetGenImage get sports => const AssetGenImage('assets/images/sports.png');
+  /// File path: assets/images/sports_image.png
+  AssetGenImage get sportsImage =>
+      const AssetGenImage('assets/images/sports_image.png');
 
-  /// File path: assets/images/technology.png
-  AssetGenImage get technology =>
-      const AssetGenImage('assets/images/technology.png');
+  /// File path: assets/images/technology_image.png
+  AssetGenImage get technologyImage =>
+      const AssetGenImage('assets/images/technology_image.png');
 
   /// List of all assets
   List<AssetGenImage> get values => [
-    business,
-    entertainment,
+    a40YersOld,
+    rectangle11,
+    businessImage,
+    entertinment,
     footer,
-    general,
-    health,
+    generalImage,
+    healthImage,
     logo,
-    science,
+    scienceImage,
     splashScreen,
-    sports,
-    technology,
+    sportsImage,
+    technologyImage,
   ];
 }
 

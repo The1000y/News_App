@@ -30,19 +30,38 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
       width: double.infinity,
       height: 195,
       decoration: BoxDecoration(
+        color: ColorPallete.primaryDarkcolor,
         borderRadius: BorderRadius.circular(24),
         image: DecorationImage(
           image: AssetImage(widget.categoryModel.image),
-          fit: BoxFit.cover,
+          alignment: widget.isLeft ? Alignment.topLeft : Alignment.topRight,
+          fit: BoxFit.scaleDown,
         ),
       ),
       child: Directionality(
         textDirection: widget.isLeft ? TextDirection.ltr : TextDirection.rtl,
 
         child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.end,
+          spacing: 30,
           mainAxisAlignment: MainAxisAlignment.end,
+
           children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 68),
+              child: Align(
+                alignment: widget.isLeft
+                    ? Alignment.topRight
+                    : Alignment.topLeft,
+                child: Text(
+                  widget.categoryModel.name,
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w500,
+                    color: ColorPallete.scafoldBackgroundColor,
+                  ),
+                ),
+              ),
+            ),
             GestureDetector(
               onTap: widget.onTap,
               child: Container(

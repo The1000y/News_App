@@ -22,38 +22,38 @@ class _HomeScreenState extends State<HomeScreen> {
       CategoryDataModel(
         id: "general",
         name: "General",
-        image: Assets.images.general.path,
+        image: Assets.images.generalImage.path,
       ),
       CategoryDataModel(
         id: "business",
         name: "Business",
-        image: Assets.images.business.path,
+        image: Assets.images.businessImage.path,
       ),
       CategoryDataModel(
         id: "sports",
         name: "Sports",
-        image: Assets.images.sports.path,
+        image: Assets.images.sportsImage.path,
       ),
       CategoryDataModel(
         id: "health",
         name: "Health",
-        image: Assets.images.health.path,
+        image: Assets.images.healthImage.path,
       ),
       CategoryDataModel(
         id: "science",
         name: "Science",
-        image: Assets.images.science.path,
+        image: Assets.images.scienceImage.path,
       ),
       CategoryDataModel(
         id: "technology",
         name: "Technology",
-        image: Assets.images.technology.path,
+        image: Assets.images.technologyImage.path,
       ),
 
       CategoryDataModel(
         id: "entertainment",
         name: "Entertainment",
-        image: Assets.images.entertainment.path,
+        image: Assets.images.entertinment.path,
       ),
     ];
     return ChangeNotifierProvider(
