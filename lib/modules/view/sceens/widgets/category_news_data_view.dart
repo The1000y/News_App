@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/core/themes/color_pallete.dart';
 import 'package:news_app/models/categry_data_model.dart';
-import 'package:news_app/modules/view_model/home_view_model.dart';
+import 'package:news_app/modules/cubit/home_view_model.dart';
 import 'package:provider/provider.dart';
 
 class CategoryNewsDataView extends StatefulWidget {

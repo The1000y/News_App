@@ -6,7 +6,7 @@ import 'package:news_app/models/categry_data_model.dart';
 import 'package:news_app/modules/view/sceens/widgets/category_news_data_view.dart';
 import 'package:news_app/modules/view/sceens/widgets/custom_card_widget.dart';
 import 'package:news_app/modules/view/sceens/widgets/custom_drawer_widget.dart';
-import 'package:news_app/modules/view_model/home_view_model.dart';
+import 'package:news_app/modules/cubit/home_view_model.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
