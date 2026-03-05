@@ -4,6 +4,7 @@ import 'package:news_app/modules/view/sceens/widgets/custom_drawer_widget.dart';
 
 class AppProvider extends ChangeNotifier {
   SelectedTheme selectedTheme = SelectedTheme.dark;
+  SelectedLanguage selectedLanguage = SelectedLanguage.en;
 
   CategoryDataModel? selectedCategory;
 
@@ -14,6 +15,16 @@ class AppProvider extends ChangeNotifier {
 
   void onChangeTheme(SelectedTheme selectedTheme) {
     this.selectedTheme = selectedTheme;
+    notifyListeners();
+  }
+
+  void clearCategory() {
+    selectedCategory = null;
+    notifyListeners();
+  }
+
+  void onChangeLanguage(SelectedLanguage selectedLanguage) {
+    this.selectedLanguage = selectedLanguage;
     notifyListeners();
   }
 }

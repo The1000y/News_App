@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/core/themes/color_pallete.dart';
+import 'package:news_app/l10n/app_localizations.dart';
 import 'package:news_app/models/categry_data_model.dart';
 
 // ignore: must_be_immutable
@@ -26,6 +27,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
   @override
   Widget build(BuildContext context) {
     var myTheme = Theme.of(context);
+    var localization = AppLocalizations.of(context)!;
 
     return Container(
       margin: EdgeInsets.only(bottom: 16),
@@ -80,7 +82,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                     Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Text(
-                        'View All',
+                        localization.view_all,
                         style: myTheme.textTheme.titleSmall!.copyWith(
                           color: AppColors.darkColor,
                         ),

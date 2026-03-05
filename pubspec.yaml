@@ -40,6 +40,9 @@ dependencies:
   provider: ^6.1.5+1
   google_fonts: ^8.0.2
   contextmenu: ^3.0.0
+  flutter_localizations:
+    sdk: flutter
+  intl: any
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +72,7 @@ flutter_gen:
 
 # The following section is specific to Flutter packages.
 flutter:
+  generate: true # Add this line
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

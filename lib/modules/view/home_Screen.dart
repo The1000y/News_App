@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/core/gen/assets.gen.dart';
 import 'package:news_app/core/provider/app_provider.dart';
+import 'package:news_app/l10n/app_localizations.dart';
 import 'package:news_app/models/categry_data_model.dart';
 import 'package:news_app/modules/view/sceens/widgets/category_news_data_view.dart';
 import 'package:news_app/modules/view/sceens/widgets/custom_card_widget.dart';
@@ -16,41 +17,42 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var localization = AppLocalizations.of(context)!;
     List<CategoryDataModel> category = [
       CategoryDataModel(
         id: "general",
-        name: "General",
+        name: localization.general,
         image: Assets.images.generalImage.path,
       ),
       CategoryDataModel(
         id: "business",
-        name: "Business",
+        name: localization.business,
         image: Assets.images.businessImage.path,
       ),
       CategoryDataModel(
         id: "sports",
-        name: "Sports",
+        name: localization.sports,
         image: Assets.images.sportsImage.path,
       ),
       CategoryDataModel(
         id: "health",
-        name: "Health",
+        name: localization.sports,
         image: Assets.images.healthImage.path,
       ),
       CategoryDataModel(
         id: "science",
-        name: "Science",
+        name: localization.science,
         image: Assets.images.scienceImage.path,
       ),
       CategoryDataModel(
         id: "technology",
-        name: "Technology",
+        name: localization.technology,
         image: Assets.images.technologyImage.path,
       ),
 
       CategoryDataModel(
         id: "entertainment",
-        name: "Entertainment",
+        name: localization.entertainment,
         image: Assets.images.entertinment.path,
       ),
     ];
@@ -65,7 +67,7 @@ class HomeScreen extends StatelessWidget {
               //////////////////////
               iconTheme: IconThemeData(color: myTheme.primaryColorDark),
               title: provider.selectedCategory == null
-                  ? Text('News', style: myTheme.textTheme.titleSmall)
+                  ? Text(localization.news, style: myTheme.textTheme.titleSmall)
                   : Text(
                       provider.selectedCategory!.name,
                       style: myTheme.textTheme.titleSmall,
@@ -81,10 +83,12 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
             drawer: CustomDrawerWidget(
+              language: provider.selectedLanguage,
+              onLanguageChange: provider.onChangeLanguage,
               onThemeChange: provider.onChangeTheme,
               theme: provider.selectedTheme,
               onTap: () {
-                provider.selectedCategory = null;
+                provider.clearCategory();
                 Navigator.pop(context);
               },
             ),
@@ -97,7 +101,7 @@ class HomeScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Good Morning ... \nHere is Some News For You",
+                            "${localization.good_morning} \n${localization.here_is_some_news_for_you}",
                             style: myTheme.textTheme.titleMedium,
                           ),
                           SizedBox(height: 16),

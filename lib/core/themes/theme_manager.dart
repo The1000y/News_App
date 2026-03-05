@@ -3,8 +3,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app/core/themes/color_pallete.dart';
 
 abstract class ThemeManager {
-  static ThemeData lightTheme = ThemeData(
-    fontFamily: GoogleFonts.poppins().fontFamily,
+  static ThemeData getLight(String language) => ThemeData(
+    fontFamily: language == 'en'
+        ? GoogleFonts.poppins().fontFamily
+        : GoogleFonts.tajawal().fontFamily,
     primaryColor: AppColors.whiteColor,
     primaryColorDark: AppColors.darkColor,
     primaryColorLight: AppColors.whiteColor,
@@ -41,8 +43,10 @@ abstract class ThemeManager {
     ),
   );
 
-  static ThemeData darkTheme = ThemeData(
-    fontFamily: GoogleFonts.poppins().fontFamily,
+  static ThemeData getDark(String language) => ThemeData(
+    fontFamily: language == 'en'
+        ? GoogleFonts.poppins().fontFamily
+        : GoogleFonts.tajawal().fontFamily,
     primaryColorDark: AppColors.whiteColor,
     primaryColorLight: AppColors.darkColor,
     primaryColor: AppColors.darkColor,

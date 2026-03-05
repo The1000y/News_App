@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:news_app/core/gen/assets.gen.dart';
 import 'package:news_app/core/provider/app_provider.dart';
 import 'package:news_app/core/themes/color_pallete.dart';
+import 'package:news_app/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 enum SelectedTheme { dark, ligth }
+
+enum SelectedLanguage { en, ar }
 
 // ignore: must_be_immutable
 class CustomDrawerWidget extends StatelessWidget {
@@ -13,16 +16,21 @@ class CustomDrawerWidget extends StatelessWidget {
     required this.onTap,
     required this.theme,
     required this.onThemeChange,
+    required this.onLanguageChange,
+    required this.language,
   });
 
   final VoidCallback onTap;
   final SelectedTheme theme;
+  final SelectedLanguage language;
   Function(SelectedTheme theme) onThemeChange;
+  Function(SelectedLanguage language) onLanguageChange;
 
   @override
   Widget build(BuildContext context) {
     return Consumer<AppProvider>(
       builder: (context, provider, child) {
+        var localization = AppLocalizations.of(context)!;
         var myTheme = Theme.of(context);
 
         return Drawer(
@@ -37,7 +45,7 @@ class CustomDrawerWidget extends StatelessWidget {
                   decoration: BoxDecoration(color: AppColors.whiteColor),
                   child: Center(
                     child: Text(
-                      'News App',
+                      localization.news_app,
                       style: myTheme.textTheme.titleLarge!.copyWith(
                         fontWeight: FontWeight.w600,
                         color: AppColors.darkColor,
@@ -54,7 +62,7 @@ class CustomDrawerWidget extends StatelessWidget {
                       children: [
                         Assets.icons.home.svg(color: AppColors.whiteColor),
                         Text(
-                          'Go to Home',
+                          localization.go_to_home,
                           style: myTheme.textTheme.titleLarge!.copyWith(
                             color: AppColors.whiteColor,
                           ),
@@ -64,7 +72,10 @@ class CustomDrawerWidget extends StatelessWidget {
                   ),
                 ),
                 Divider(thickness: 2, endIndent: 20, indent: 20),
-                headerTitle(icon: Assets.icons.theme, title: 'Theme'),
+                headerTitle(
+                  icon: Assets.icons.theme,
+                  title: localization.theme,
+                ),
 
                 //menu of theme
                 PopupMenuButton<SelectedTheme>(
@@ -76,35 +87,50 @@ class CustomDrawerWidget extends StatelessWidget {
                     return [
                       PopupMenuItem(
                         value: SelectedTheme.dark,
-                        child: Text('Dark'),
+                        child: Text(localization.dark),
                       ),
                       PopupMenuItem(
                         value: SelectedTheme.ligth,
-                        child: Text('Light'),
+                        child: Text(localization.light),
                       ),
                     ];
                   },
                   child: CustomContainer(
-                    title: theme == SelectedTheme.dark ? 'Dark' : 'Light',
+                    title: theme == SelectedTheme.dark
+                        ? localization.dark
+                        : localization.light,
                   ),
                 ),
                 SizedBox(height: 25),
                 Divider(thickness: 2, endIndent: 20, indent: 20),
-                headerTitle(icon: Assets.icons.earth, title: 'Language'),
+                headerTitle(
+                  icon: Assets.icons.earth,
+                  title: localization.language,
+                ),
 
                 //menu of language
-                PopupMenuButton(
+                PopupMenuButton<SelectedLanguage>(
                   offset: Offset(60, 50),
                   onSelected: (value) {
-                    selectedLanguage = value;
+                    onLanguageChange(value);
                   },
                   itemBuilder: (context) {
                     return [
-                      PopupMenuItem(value: 'English', child: Text('English')),
-                      PopupMenuItem(value: 'Arabic', child: Text('Arabic')),
+                      PopupMenuItem(
+                        value: SelectedLanguage.en,
+                        child: Text(localization.english),
+                      ),
+                      PopupMenuItem(
+                        value: SelectedLanguage.ar,
+                        child: Text(localization.arabic),
+                      ),
                     ];
                   },
-                  child: CustomContainer(title: selectedLanguage),
+                  child: CustomContainer(
+                    title: language == SelectedLanguage.en
+                        ? localization.english
+                        : localization.arabic,
+                  ),
                 ),
               ],
             ),
@@ -115,7 +141,7 @@ class CustomDrawerWidget extends StatelessWidget {
   }
 
   // String selectedTheme = 'Dark';
-  String selectedLanguage = 'English';
+  // String selectedLanguage = 'English';
 }
 
 class CustomContainer extends StatelessWidget {
