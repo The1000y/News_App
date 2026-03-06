@@ -37,7 +37,7 @@ dependencies:
   flutter_svg: ^2.2.3
   cached_network_image: ^3.4.1
   http: ^1.6.0
-  bloc: ^9.2.0
+  flutter_bloc: ^9.1.1
   provider: ^6.1.5+1
   google_fonts: ^8.0.2
   contextmenu: ^3.0.0

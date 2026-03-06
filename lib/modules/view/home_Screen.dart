@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/core/gen/assets.gen.dart';
-import 'package:news_app/core/provider/app_provider.dart';
+// import 'package:news_app/core/provider/app_provider.dart';
 import 'package:news_app/l10n/app_localizations.dart';
 import 'package:news_app/models/categry_data_model.dart';
+import 'package:news_app/modules/all_cubits/app_setting/app_cubit.dart';
+
 import 'package:news_app/modules/view/sceens/widgets/category_news_data_view.dart';
 import 'package:news_app/modules/view/sceens/widgets/custom_card_widget.dart';
 import 'package:news_app/modules/view/sceens/widgets/custom_drawer_widget.dart';
-import 'package:news_app/modules/cubit/home_view_model.dart';
-import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
 
-  // SelectedTheme selectedTheme = SelectedTheme.dark;
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
 
+class _HomeScreenState extends State<HomeScreen> {
+  // SelectedTheme selectedTheme = SelectedTheme.dark;
   @override
   Widget build(BuildContext context) {
     var localization = AppLocalizations.of(context)!;
@@ -56,77 +62,73 @@ class HomeScreen extends StatelessWidget {
         image: Assets.images.entertinment.path,
       ),
     ];
-    return ChangeNotifierProvider(
-      create: (context) => HomeViewModel(),
-      child: Consumer<AppProvider>(
-        builder: (context, provider, child) {
-          var myTheme = Theme.of(context);
+    return BlocBuilder<AppCubit, AppState>(
+      builder: (context, state) {
+        var myTheme = Theme.of(context);
+        var currentCubit = context.read<AppCubit>();
 
-          return Scaffold(
-            appBar: AppBar(
-              //////////////////////
-              iconTheme: IconThemeData(color: myTheme.primaryColorDark),
-              title: provider.selectedCategory == null
-                  ? Text(localization.news, style: myTheme.textTheme.titleSmall)
-                  : Text(
-                      provider.selectedCategory!.name,
-                      style: myTheme.textTheme.titleSmall,
-                    ),
-              actions: [
-                IconButton(
-                  onPressed: () {},
-                  ///////////////////////////
-                  icon: Assets.icons.search.svg(
-                    color: myTheme.primaryColorDark,
+        return Scaffold(
+          appBar: AppBar(
+            //////////////////////
+            iconTheme: IconThemeData(color: myTheme.primaryColorDark),
+            title: currentCubit.selectedCategory == null
+                ? Text(localization.news, style: myTheme.textTheme.titleSmall)
+                : Text(
+                    currentCubit.selectedCategory!.name,
+                    style: myTheme.textTheme.titleSmall,
                   ),
+            actions: [
+              IconButton(
+                onPressed: () {},
+                ///////////////////////////
+                icon: Assets.icons.search.svg(color: myTheme.primaryColorDark),
+              ),
+            ],
+          ),
+          drawer: CustomDrawerWidget(
+            language: currentCubit.selectedLanguage,
+            onLanguageChange: currentCubit.onChangeLanguage,
+            onThemeChange: currentCubit.onChangeTheme,
+            theme: currentCubit.selectedTheme,
+            onTap: () {
+              currentCubit.clearCategory();
+              Navigator.pop(context);
+            },
+          ),
+
+          body: currentCubit.selectedCategory == null
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "${localization.good_morning} \n${localization.here_is_some_news_for_you}",
+                          style: myTheme.textTheme.titleMedium,
+                        ),
+                        SizedBox(height: 16),
+                        ...List.generate(category.length, (index) {
+                          return CustomCardWidget(
+                            onSwap: (categoryDataModel) {
+                              currentCubit.onSelectedCategory(category[index]);
+                            },
+                            onTap: () {
+                              currentCubit.onSelectedCategory(category[index]);
+                            },
+                            categoryModel: category[index],
+                            isLeft: index % 2 == 0,
+                          );
+                        }),
+                      ],
+                    ),
+                  ),
+                )
+              : CategoryNewsDataView(
+                  categoryDataModel: currentCubit.selectedCategory!,
                 ),
-              ],
-            ),
-            drawer: CustomDrawerWidget(
-              language: provider.selectedLanguage,
-              onLanguageChange: provider.onChangeLanguage,
-              onThemeChange: provider.onChangeTheme,
-              theme: provider.selectedTheme,
-              onTap: () {
-                provider.clearCategory();
-                Navigator.pop(context);
-              },
-            ),
-
-            body: provider.selectedCategory == null
-                ? Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "${localization.good_morning} \n${localization.here_is_some_news_for_you}",
-                            style: myTheme.textTheme.titleMedium,
-                          ),
-                          SizedBox(height: 16),
-                          ...List.generate(category.length, (index) {
-                            return CustomCardWidget(
-                              onSwap: (categoryDataModel) {
-                                provider.onSelectedCategory(category[index]);
-                              },
-                              onTap: () {
-                                provider.onSelectedCategory(category[index]);
-                              },
-                              categoryModel: category[index],
-                              isLeft: index % 2 == 0,
-                            );
-                          }),
-                        ],
-                      ),
-                    ),
-                  )
-                : CategoryNewsDataView(
-                    categoryDataModel: provider.selectedCategory!,
-                  ),
-          );
-        },
-      ),
+        );
+      },
     );
   }
 }

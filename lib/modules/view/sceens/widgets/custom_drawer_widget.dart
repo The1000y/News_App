@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/core/gen/assets.gen.dart';
-import 'package:news_app/core/provider/app_provider.dart';
 import 'package:news_app/core/themes/color_pallete.dart';
 import 'package:news_app/l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
+import 'package:news_app/modules/all_cubits/app_setting/app_cubit.dart';
+
+// import 'package:provider/provider.dart';
 
 enum SelectedTheme { dark, ligth }
 
@@ -28,8 +30,9 @@ class CustomDrawerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AppProvider>(
-      builder: (context, provider, child) {
+    return BlocBuilder<AppCubit, AppState>(
+      builder: (context, state) {
+        // var currentCubit = context.watch<HomeCubit>();
         var localization = AppLocalizations.of(context)!;
         var myTheme = Theme.of(context);
 
