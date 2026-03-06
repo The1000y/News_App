@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       CategoryDataModel(
         id: "health",
-        name: localization.sports,
+        name: localization.health,
         image: Assets.images.healthImage.path,
       ),
       CategoryDataModel(
