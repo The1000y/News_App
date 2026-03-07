@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/core/config/page_route_name.dart';
-import 'package:news_app/modules/view/home_Screen.dart';
+import 'package:news_app/modules/view/sceens/home_Screen.dart';
 import 'package:news_app/modules/view/splash/splash_Screen.dart';
 
 class AppRoute {

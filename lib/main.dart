@@ -8,16 +8,23 @@ import 'package:news_app/l10n/app_localizations.dart';
 import 'package:news_app/modules/all_cubits/app_setting/app_cubit.dart';
 import 'package:news_app/modules/all_cubits/articals_cubit/articals_cubit.dart';
 import 'package:news_app/modules/all_cubits/sources_cubit/sources_cubit.dart';
+import 'package:news_app/modules/repositary/remote_repositay_implementation.dart';
 import 'package:news_app/modules/view/sceens/widgets/custom_drawer_widget.dart';
 
 void main() {
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => ArticalsCubit()),
+        BlocProvider(
+          create: (context) =>
+              ArticalsCubit(RemoteHomeRepositaryImplementation()),
+        ),
         BlocProvider(create: (context) => AppCubit()),
         BlocProvider(
-          create: (context) => SourcesCubit(context.read<ArticalsCubit>()),
+          create: (context) => SourcesCubit(
+            context.read<ArticalsCubit>(),
+            RemoteHomeRepositaryImplementation(),
+          ),
         ),
       ],
       child: const MyApp(),
