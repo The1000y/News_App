@@ -15,6 +15,8 @@ class AppCubit extends Cubit<AppState> {
   SelectedTheme selectedTheme = SelectedTheme.dark;
   SelectedLanguage selectedLanguage = SelectedLanguage.en;
 
+  bool get isDark => selectedTheme == SelectedTheme.dark;
+
   CategoryDataModel? selectedCategory;
 
   void onSelectedCategory(CategoryDataModel categoryDataModel) {

@@ -3,5 +3,5 @@ import 'package:news_app/models/source_data_model.dart';
 
 abstract class HomeRepositary {
   Future<List<SourceData>> getSources(String categoryId);
-  Future<List<Article>?> getArtical(String sourceId);
+  Future<List<Artical>?> getArtical(String sourceId);
 }

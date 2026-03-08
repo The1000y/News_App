@@ -64,4 +64,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get entertainment => 'ترفيه';
+
+  @override
+  String get view_full_articel => 'عرض المقال كاملاً';
 }

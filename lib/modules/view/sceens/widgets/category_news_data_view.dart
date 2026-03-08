@@ -8,6 +8,7 @@ import 'package:news_app/modules/all_cubits/sources_cubit/view/sources_view.dart
 
 class CategoryNewsDataView extends StatefulWidget {
   final CategoryDataModel categoryDataModel;
+
   const CategoryNewsDataView({super.key, required this.categoryDataModel});
 
   @override

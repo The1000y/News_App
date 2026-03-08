@@ -64,4 +64,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get entertainment => 'Entertainment';
+
+  @override
+  String get view_full_articel => 'View Full Articel';
 }

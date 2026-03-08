@@ -9,7 +9,7 @@ class ArticalsCubit extends Cubit<ArticalsState> {
   final HomeRepositary _homeRepositary;
   ArticalsCubit(this._homeRepositary) : super(ArticalsInitial());
 
-  List<Article>? _listArtical = [];
+  List<Artical>? _listArtical = [];
 
   Future<void> getArticals(String sourceId) async {
     try {

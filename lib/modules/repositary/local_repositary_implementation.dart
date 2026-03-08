@@ -4,7 +4,7 @@ import 'package:news_app/modules/repositary/repositary.dart';
 
 class LocalRepositaryImplementation implements HomeRepositary {
   @override
-  Future<List<Article>?> getArtical(String sourceId) {
+  Future<List<Artical>?> getArtical(String sourceId) {
     // TODO: implement getArtical
     throw UnimplementedError();
   }

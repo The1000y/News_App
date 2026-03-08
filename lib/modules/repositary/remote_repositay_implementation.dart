@@ -5,7 +5,7 @@ import 'package:news_app/network_handler/network_handler.dart';
 
 class RemoteHomeRepositaryImplementation implements HomeRepositary {
   @override
-  Future<List<Article>?> getArtical(String sourceId) async {
+  Future<List<Artical>?> getArtical(String sourceId) async {
     return await NetworkHandler.getArtical(sourceId);
   }
 

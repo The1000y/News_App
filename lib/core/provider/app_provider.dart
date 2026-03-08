@@ -8,6 +8,8 @@ class AppProvider extends ChangeNotifier {
 
   CategoryDataModel? selectedCategory;
 
+  bool get isDark => selectedTheme == SelectedTheme.dark;
+
   void onSelectedCategory(CategoryDataModel categoryDataModel) {
     selectedCategory = categoryDataModel;
     notifyListeners();

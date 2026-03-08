@@ -29,7 +29,7 @@ class NetworkHandler {
     }
   }
 
-  static Future<List<Article>?> getArtical(String sourceId) async {
+  static Future<List<Artical>?> getArtical(String sourceId) async {
     try {
       Map<String, dynamic> queryParametar = {
         "apiKey": ApiConstance.apiKey,

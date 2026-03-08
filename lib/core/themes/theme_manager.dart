@@ -10,6 +10,16 @@ abstract class ThemeManager {
     primaryColor: AppColors.whiteColor,
     primaryColorDark: AppColors.darkColor,
     primaryColorLight: AppColors.whiteColor,
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.whiteColor,
+        foregroundColor: AppColors.darkColor,
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadiusGeometry.all(Radius.circular(12)),
+        ),
+      ),
+    ),
 
     scaffoldBackgroundColor: AppColors.whiteColor,
     textTheme: TextTheme(
@@ -50,6 +60,17 @@ abstract class ThemeManager {
     primaryColorDark: AppColors.whiteColor,
     primaryColorLight: AppColors.darkColor,
     primaryColor: AppColors.darkColor,
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.darkColor,
+        foregroundColor: AppColors.whiteColor,
+
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadiusGeometry.all(Radius.circular(12)),
+        ),
+      ),
+    ),
     textTheme: TextTheme(
       titleSmall: TextStyle(
         fontSize: 24,

@@ -5,7 +5,7 @@ sealed class ArticalsState {}
 final class ArticalsInitial extends ArticalsState {}
 
 class SuccessGetArtical extends ArticalsState {
-  List<Article>? listArtical = [];
+  List<Artical>? listArtical = [];
   SuccessGetArtical({required this.listArtical});
 }
 

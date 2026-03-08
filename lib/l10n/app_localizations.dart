@@ -211,6 +211,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Entertainment'**
   String get entertainment;
+
+  /// No description provided for @view_full_articel.
+  ///
+  /// In en, this message translates to:
+  /// **'View Full Articel'**
+  String get view_full_articel;
 }
 
 class _AppLocalizationsDelegate
