@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/core/config/page_route_name.dart';
 import 'package:news_app/core/themes/color_pallete.dart';
 import 'package:news_app/l10n/app_localizations.dart';
 import 'package:news_app/models/data/article.articals.model.dart';
@@ -157,7 +158,13 @@ class ArticalView extends StatelessWidget {
                 ),
                 Spacer(),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      PageRouteName.webSceen,
+                      arguments: myArtical.url,
+                    );
+                  },
                   child: Center(
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
